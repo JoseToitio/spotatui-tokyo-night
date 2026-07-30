@@ -21,7 +21,7 @@ remembers your choice across restarts. Bind it to a key of your choosing in
 
 ```yaml
 plugin_commands:
-  tokyo_night_cycle: "ctrl-t"
+  tokyo_night_cycle: "alt-t"
 ```
 
 Night is the default until you cycle away from it.
