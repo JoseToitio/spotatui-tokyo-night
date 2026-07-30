@@ -1,6 +1,7 @@
 # Tokyo Night
 
-Tokyo Night color scheme for [spotatui](https://github.com/LargeModGames/spotatui).
+Tokyo Night color scheme for [spotatui](https://github.com/LargeModGames/spotatui), with the
+upstream Night, Storm, and Moon variants.
 
 ## Install
 
@@ -8,28 +9,58 @@ Tokyo Night color scheme for [spotatui](https://github.com/LargeModGames/spotatu
 spotatui plugin add JoseToitio/spotatui-tokyo-night
 ```
 
-Or drop the `tokyo-night/` folder into `~/.config/spotatui/plugins/`.
+Or copy this repository into `~/.config/spotatui/plugins/spotatui-tokyo-night/`.
 
-Requires plugin API 6 (spotatui 0.39+).
+Requires plugin API 5 (spotatui 0.40.2+), for the persistent variant store.
+
+## Switching variants
+
+The plugin registers a `tokyo_night_cycle` command that rotates Night → Storm → Moon and
+remembers your choice across restarts. Bind it to a key of your choosing in
+`~/.config/spotatui/config.yml`:
+
+```yaml
+plugin_commands:
+  tokyo_night_cycle: "ctrl-t"
+```
+
+Night is the default until you cycle away from it.
 
 ## Colors
 
-| Key | Hex |
-|---|---|
-| background | #1a1b26 |
-| text | #ffffff |
-| active / hovered | #7aa2f7 |
-| selected | #7dcfff |
-| header / banner | #bb9af7 |
-| playbar_background | #292e42 |
-| playbar_progress | #9ece6a |
-| playbar_text / playbar_progress_text | #c0caf5 |
-| highlighted_lyrics | #7dcfff |
-| analysis_bar | #7aa2f7 |
-| analysis_bar_text | #1a1b26 |
-| error | #f7768e |
-| hint / inactive | #565f89 |
+Palette values are the upstream [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)
+ones. Night is Storm with the backgrounds darkened, which is how upstream defines it too.
 
-Note: `selected` is a **foreground** color in spotatui — it styles the track title in
-the playbar, list selections, and headings. Setting it to a dark background shade
-makes the track name invisible.
+| spotatui field | tokyonight key | Night | Storm | Moon |
+|---|---|---|---|---|
+| `background` | `bg` | #1a1b26 | #24283b | #222436 |
+| `playbar_background` | `bg_highlight` | #292e42 | #292e42 | #2f334d |
+| `playbar_text`, `playbar_progress_text` | `fg` | #c0caf5 | #c0caf5 | #c8d3f5 |
+| `active`, `hovered`, `analysis_bar` | `blue` | #7aa2f7 | #7aa2f7 | #82aaff |
+| `selected`, `highlighted_lyrics` | `cyan` | #7dcfff | #7dcfff | #86e1fc |
+| `header`, `banner` | `magenta` | #bb9af7 | #bb9af7 | #c099ff |
+| `playbar_progress` | `green` | #9ece6a | #9ece6a | #c3e88d |
+| `error_text`, `error_border` | `red` | #f7768e | #f7768e | #ff757f |
+| `hint`, `inactive` | `comment` | #565f89 | #565f89 | #636da6 |
+| `analysis_bar_text` | `bg` | #1a1b26 | #24283b | #222436 |
+| `text` | — | #ffffff | #ffffff | #ffffff |
+
+`text` is deliberately pure white instead of the palette's `fg`. It is the primary body
+foreground, and the extra contrast against these backgrounds reads better than #c0caf5 does.
+
+Two notes on how spotatui reads these fields:
+
+- `selected` is a **foreground** color — it styles the track title in the playbar, list
+  selections, and headings. Setting it to a dark background shade makes the track name invisible.
+- `analysis_bar` and `analysis_bar_text` cannot be set from `config.yml` at all; they are only
+  reachable through a plugin's `set_theme`.
+
+Theme overrides are runtime-only and are never written back to `config.yml`. That is why the
+plugin re-applies on every `start` event.
+
+## Tokyo Night Day
+
+Not included. Upstream generates the Day palette by inverting and blending the dark one at
+runtime rather than listing hex values, so there is no authoritative table to port. A light
+variant also needs its own foreground/background reasoning rather than the same key mapping —
+see the `selected` note above.
