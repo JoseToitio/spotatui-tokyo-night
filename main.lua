@@ -15,7 +15,6 @@ spotatui.require_api(5) -- storage_get/storage_set
 local palettes = {
 	night = {
 		bg = "26, 27, 38", -- #1a1b26
-		bg_highlight = "41, 46, 66", -- #292e42
 		fg = "192, 202, 245", -- #c0caf5
 		blue = "122, 162, 247", -- #7aa2f7
 		cyan = "125, 207, 255", -- #7dcfff
@@ -26,7 +25,6 @@ local palettes = {
 	},
 	storm = {
 		bg = "36, 40, 59", -- #24283b
-		bg_highlight = "41, 46, 66", -- #292e42
 		fg = "192, 202, 245", -- #c0caf5
 		blue = "122, 162, 247", -- #7aa2f7
 		cyan = "125, 207, 255", -- #7dcfff
@@ -37,7 +35,6 @@ local palettes = {
 	},
 	moon = {
 		bg = "34, 36, 54", -- #222436
-		bg_highlight = "47, 51, 77", -- #2f334d
 		fg = "200, 211, 245", -- #c8d3f5
 		blue = "130, 170, 255", -- #82aaff
 		cyan = "134, 225, 252", -- #86e1fc
@@ -56,7 +53,6 @@ local variants = { "night", "storm", "moon" }
 for name, palette in pairs(palettes) do
 	for _, key in ipairs({
 		"bg",
-		"bg_highlight",
 		"fg",
 		"blue",
 		"cyan",
@@ -85,7 +81,7 @@ local function apply(name)
 		selected = p.cyan,
 		header = p.magenta,
 		banner = p.magenta,
-		playbar_background = p.bg_highlight,
+		playbar_background = p.bg,
 		playbar_progress = p.green,
 		playbar_text = p.fg,
 		playbar_progress_text = p.fg,

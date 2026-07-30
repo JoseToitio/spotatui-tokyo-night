@@ -33,8 +33,7 @@ ones. Night is Storm with the backgrounds darkened, which is how upstream define
 
 | spotatui field | tokyonight key | Night | Storm | Moon |
 |---|---|---|---|---|
-| `background` | `bg` | #1a1b26 | #24283b | #222436 |
-| `playbar_background` | `bg_highlight` | #292e42 | #292e42 | #2f334d |
+| `background`, `playbar_background` | `bg` | #1a1b26 | #24283b | #222436 |
 | `playbar_text`, `playbar_progress_text` | `fg` | #c0caf5 | #c0caf5 | #c8d3f5 |
 | `active`, `hovered`, `analysis_bar` | `blue` | #7aa2f7 | #7aa2f7 | #82aaff |
 | `selected`, `highlighted_lyrics` | `cyan` | #7dcfff | #7dcfff | #86e1fc |
@@ -47,6 +46,9 @@ ones. Night is Storm with the backgrounds darkened, which is how upstream define
 
 `text` is deliberately pure white instead of the palette's `fg`. It is the primary body
 foreground, and the extra contrast against these backgrounds reads better than #c0caf5 does.
+
+`playbar_background` deliberately matches `background` rather than using the palette's lighter
+`bg_highlight`, so the playbar reads as part of the window instead of as a separate panel.
 
 Two notes on how spotatui reads these fields:
 
